@@ -4,7 +4,7 @@
 (def render (renderer "ink"))
 
 (defn ink
-  "FIXME: write documentation"
+  "A boot template for sketching with quil"
   [name]
   (let [data {:name name
               :sanitized (name-to-path name)}]

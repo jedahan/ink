@@ -6,8 +6,8 @@
           ;; :source-paths   #{"test"}
           :dependencies   '[[org.clojure/clojure "RELEASE"]
                             [boot/new "RELEASE"]
-                            [adzerk/boot-test "RELEASE" :scope "test"]])
-
+                            [adzerk/boot-test "RELEASE" :scope "test"]
+                            [adzerk/bootlaces "RELEASE"]])
 (task-options!
  pom {:project     project
       :version     version
@@ -23,4 +23,8 @@
   (comp (pom) (jar) (install)))
 
 (require '[adzerk.boot-test :refer [test]]
+         '[adzerk.bootlaces :refer :all]
          '[boot.new :refer [new]])
+
+(bootlaces! version)
+
