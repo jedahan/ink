@@ -56,11 +56,6 @@
   (comp (development)
         (run)))
 
-(deftask github-pages
-  "Build a production version to github-pages `docs/` directory"
-  (prod "docs/")
-)
-
 (deftask prod
   "Simple alias to run application in production mode"
   [d directories PATH #{str} "the set of directories to write to (target)."]
@@ -69,3 +64,8 @@
        (cljs)
        (target :dir dir)))
   )
+
+(deftask github-pages
+  "Build a production version to github-pages `docs/` directory"
+  []
+  (comp (prod :directories ["docs/"])))
