@@ -47,7 +47,7 @@
 
 (deftask development []
   (task-options! cljs {:optimizations :none :source-map true}
-                 reload {:on-jsload 'twelve-plus-eight.core/twelve-plus-eight})
+                 reload {:on-jsload '{{name}}.sketch/{{name}}})
   identity)
 
 (deftask dev
