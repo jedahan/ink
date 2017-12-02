@@ -1,4 +1,4 @@
-(ns {{name}}
+(ns {{name}}.sketch
   (:require [quil.core :as q :include-macros true]
             [quil.middleware :as m]))
 
@@ -15,7 +15,7 @@
 ; and gets passed an object with the current mouse x and y, and previous mouse x and y
 (defn mouse-moved [state mouse]
   (let [radius (max (:min-radius state) (/ (:x mouse) 2))
-        green (q/map (:y mouse) 0 (q/width) 0 255)]
+        green (q/map-range (:y mouse) 0 (q/width) 0 255)]
     (assoc state :radius radius :green green)
   ))
 
@@ -26,7 +26,7 @@
   (q/background 220 220 120)
   (q/fill 255 (:green state) 255)
   (q/with-translation (:center state)
-    (q/circle (:radius state))
+    (q/ellipse 0 0 (:radius state) (:radius state))
   ))
 
 (q/defsketch {{name}}
