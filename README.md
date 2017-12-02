@@ -9,6 +9,12 @@ A [boot](http://boot-clj.com/) template for making sketches with [quil](https://
     boot dev
     open [http://localhost:3000]
 
+## Updating
+
+   To update the template, after committing changes:
+
+     boot build-jar push-snapshot
+
 ## License
 
 Copyright © 2017 Jonathan Dahan
