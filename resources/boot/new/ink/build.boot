@@ -46,4 +46,4 @@
 (deftask github-pages
   "Build a production version to github-pages `docs/` directory"
   []
-  (comp (prod :directories ["docs/"])))
+  (comp (build :directories ["docs/"])))
