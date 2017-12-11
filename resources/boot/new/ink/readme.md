@@ -2,6 +2,8 @@
 
 A quil sketch, made with [ink](http://jedahan.com/ink)
 
+The default sketch has a concept of time for animations. You can press 'd' to toggle debug view, 's' to save a png, and 'q' to quit.
+
 ## develop
 
     boot develop
