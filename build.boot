@@ -15,7 +15,8 @@
       :url         "http://jedahan.com/ink"
       :scm         {:url "https://github.com/jedahan/ink"}
       :license     {"Eclipse Public License"
-                    "http://www.eclipse.org/legal/epl-v10.html"}})
+                    "http://www.eclipse.org/legal/epl-v10.html"}}
+ push {:gpg-sign false})
 
 (deftask build
   "Build and install the project locally."
@@ -24,7 +25,7 @@
 
 (deftask deploy
   []
-  (comp (build) (push :repo "clojars" :gpg-sign false)))
+  (comp (pom) (jar) (push)))
 
 (require '[adzerk.boot-test :refer [test]]
          '[adzerk.bootlaces :refer :all]
