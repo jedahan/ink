@@ -18,6 +18,12 @@
                     "http://www.eclipse.org/legal/epl-v10.html"}}
  push {:gpg-sign false})
 
+(require '[adzerk.boot-test :refer [test]]
+         '[adzerk.bootlaces :refer :all]
+         '[boot.new :refer [new]])
+
+(bootlaces! version)
+
 (deftask build
   "Build and install the project locally."
   []
@@ -26,10 +32,4 @@
 (deftask deploy
   []
   (comp (pom) (jar) (push)))
-
-(require '[adzerk.boot-test :refer [test]]
-         '[adzerk.bootlaces :refer :all]
-         '[boot.new :refer [new]])
-
-(bootlaces! version)
 
