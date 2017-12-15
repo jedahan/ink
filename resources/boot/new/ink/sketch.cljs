@@ -6,18 +6,18 @@
 (defn setup []
   (q/frame-rate 30) ; target 30 frames per second
   {:radius 10
-   :green 0
+   :hue 0
    :min-radius 25
    :center [(/ (q/width) 2) (/ (q/height) 2)]
-   :debug false
+   :debug true
   })
 
 ; mouse-moved runs every time the mouse is moved
 ; and gets passed an object with the current mouse x and y, and previous mouse x and y
 (defn mouse-moved [state mouse]
-  (let [radius (max (:min-radius state) (/ (:x mouse) 2))
-        green (q/map-range (:y mouse) 0 (q/width) 0 255)]
-    (assoc state :radius radius :green green)
+  (let [radius (max (* 0.8 (:y mouse)) (:min-radius state))
+        hue (q/map-range (:x mouse) 0 (q/height) 0 255)]
+    (assoc state :radius radius :hue hue)
   ))
 
 ; key-pressed for debug mode, and saving graphics
@@ -37,17 +37,30 @@
     (assoc state :time t :save-frame false)))
 
 (defn draw-state [state]
-  (q/background 220 220 120)
-  (q/fill 255 (:green state) 255)
+  (q/color-mode :rgb)
+  (q/background 0 140 255)
+  (q/no-stroke)
+  (q/color-mode :hsb)
+  (q/fill (:hue state) 200 200)
   (q/with-translation (:center state)
     (q/ellipse (q/sin (:time state)) (q/cos (:time state)) (:radius state) (:radius state))
   )
   (if (:debug state)
-    (let [x 0 y (- (q/height) 16)]
-      (q/fill 255 255 255)
-      (q/text-size 20)
-      (q/text "time " x y)
-      (q/text-num (:time state) (+ 40 x) y))))
+    (let [text-size 20
+          line-height (* 1.25 text-size)
+          x 0
+          y (- (q/height) text-size)]
+      (q/fill 0 0 255)
+      (q/text-size text-size)
+      (q/text-align :right)
+      (q/text "'d' toggles debug
+              's' screenshots
+              'q' quits" (- (q/width) 10) (- y 10 (* 2 line-height)))
+      (q/text-align :left)
+      (let [newlines (clojure.string/replace (str (assoc state :time (q/floor (:time state)))) "," "\n" )
+            no-brackets (clojure.string/replace newlines "}" "")
+            state-info (clojure.string/replace no-brackets "{" " ")]
+        (q/text state-info 0 line-height)))))
 
 (q/defsketch {{name}}
   :host "{{name}}"
