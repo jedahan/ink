@@ -1,6 +1,6 @@
 # ink
 
-A [boot](http://boot-clj.com/) template for making sketches with [quil](https://quil.info).
+A [boot](http://boot-clj.com/) template for making sketches with [quil](http://quil.info).
 
 ## Usage
 
